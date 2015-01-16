@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'rajaongkir'
-  s.version     = '0.1.2'
+  s.version     = '0.1.2.1'
   s.date        = '2015-01-15'
   s.summary     = "Simple class untuk API rajaongkir.com"
   s.description = "Simple class ruby untuk API rajaongkir.com"
