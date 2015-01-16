@@ -5,11 +5,12 @@ require 'unirest'
 # http://rajaongkir.com/dokumentasi
 
 class Rajaongkir
+	attr_accessor :key, :base_url
 
 	# key = API KEY dari rajaongkir
 	def initialize(key = nil)
-		@@key = key
-		@@base_url = "http://rajaongkir.com/api/"
+		@key = key
+		@base_url = "http://rajaongkir.com/api/"
 	end
 
 	# fungsi untuk mendapatkan data kota
@@ -41,13 +42,13 @@ class Rajaongkir
 	# fungsi untuk mengirimkan request ke rajaongkir
 	private
 	def request(function, params = nil, http_method = 'get')
-		if @@key.nil? || @@key == ''
+		if @key.nil? || @key == ''
 			return "API-KEY tidak boleh kosong"
 		else
 			return Unirest.send(
 					http_method.to_sym, 
-					@@base_url + function, 
-					headers:{"key" => @@key},	
+					@base_url + function, 
+					headers:{"key" => @key},	
 					parameters: params
 				)
 		end
