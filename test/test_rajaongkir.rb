@@ -22,7 +22,6 @@ class RajaongkirTest < Minitest::Unit::TestCase
 	def test_any_cost
 		rajaongkir = Rajaongkir.new $key
 
-		params = {'id' => '6'}
 		response = rajaongkir.cost(501, 114, 1000, "jne")
 		assert_equal response.code,200
 	end
