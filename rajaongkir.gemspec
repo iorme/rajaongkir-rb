@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Harry Yunanto"]
   s.email       = 'yunanto2209@gmail.com'
   s.files       = ["lib/rajaongkir.rb"]
-  s.homepage    = 'http://rubygems.org/gems/rajaongkir'
-  s.license       = 'MIT'
+  s.homepage    = 'https://github.com/iorme/rajaongkir-rb'
+  s.license     = 'MIT'
   s.add_development_dependency "unirest", '~> 0'
 end
