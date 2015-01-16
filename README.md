@@ -1,14 +1,12 @@
 # Class untuk konsumsi API dari rajaongkir.com
 
-### Requirement
-- unirest ruby (http://unirest.io/ruby.html)
+## Requirement
+unirest ([unirest ruby] (http://unirest.io/ruby.html))
 
-### Instalasi
-```ruby
+# Instalasi
 gem install rajaongkir
-```
 
-### Cara penggunaan
+# Cara penggunaan
 Request:
 ```ruby
 require "rajaongkir"
