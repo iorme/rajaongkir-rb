@@ -16,14 +16,14 @@ class Rajaongkir
 	#
 	# params = {'province' => '6', 'id' => '161'}
 	def city(params = nil)
-		execute "city",params
+		request "city",params
 	end
 
 	# fungsi untuk mendapatkan data provinsi
 	#
 	# params = {'id' => '6'}
 	def province(params = nil)
-		execute "province", params
+		request "province", params
 	end
 
 	# fungsi untuk mendapatkan data ongkos kirim
@@ -35,12 +35,12 @@ class Rajaongkir
 	def cost(origin, destination, weight, courier = 'pos')
 		params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
 
-		execute "cost", params, 'post'
+		request "cost", params, 'post'
 	end
 
 	# fungsi untuk mengirimkan request ke rajaongkir
 	private
-	def execute(function, params = nil, http_method = 'get')
+	def request(function, params = nil, http_method = 'get')
 		if $key.nil? || $key == ''
 			return "API-KEY tidak boleh kosong"
 		else
