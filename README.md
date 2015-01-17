@@ -30,6 +30,12 @@ puts response.raw_body
 # weight 		Berat kiriman dalam gram
 # courier 		Kode kurir (jne, pos, tiki)
 puts rj.cost(501, 114, 1000, "jne").raw_body
+
+# fungsi untuk mendapatkan API-KEY
+puts rj.key
+
+# fungsi untuk mendapatkan base_url
+puts rj.base_url
 ```
 
 Response:

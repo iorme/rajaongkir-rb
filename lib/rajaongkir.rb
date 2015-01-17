@@ -13,6 +13,16 @@ class Rajaongkir
 		@base_url = "http://rajaongkir.com/api/"
 	end
 
+	# fungsi untuk mendapatkan API-KEY
+	def get_key
+		@key
+	end
+
+	# fungsi untuk mendapatkan base_url
+	def get_base_url
+		$base_url
+	end
+
 	# fungsi untuk mendapatkan data kota
 	#
 	# params = {'province' => '6', 'id' => '161'}
