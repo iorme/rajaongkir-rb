@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'unirest'
+require File.join(File.dirname(__FILE__), "response.rb")
 
 # simple class ruby untuk API Rajaongkir
 # http://rajaongkir.com/dokumentasi
@@ -43,17 +44,44 @@ class Rajaongkir
     # destination ID kota tujuan
     # weight Berat kiriman dalam gram
     # courier Kode kurir (jne, pos, tiki)
-	def cost(origin, destination, weight, courier = 'pos')
-		params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
+	def cost(origin = '', destination = '', weight = 0, courier = 'pos')
+		error_message = Hash.new
 
-		request "cost", params, 'post'
+		if origin == ''
+			error = 1
+			error_message['origin'] = 'origin tidak boleh kosong'
+		end
+		if destination == ''
+			error = 1
+			error_message['destination'] = 'destination tidak boleh kosong'
+		end
+		if weight == 0
+			error = 1
+			error_message['weight'] = 'weight harus lebih besar dari 0'
+		end
+		
+		if error == 1
+			params = Hash.new
+			params['code'] = 500
+			params['body'] = error_message
+			data_return = Response.new params
+
+			return data_return
+		else		
+			params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
+
+			request "cost", params, 'post'
+		end
 	end
 
 	# fungsi untuk mengirimkan request ke rajaongkir
 	private
 	def request(function, params = nil, http_method = 'get')
 		if @key.nil? || @key == ''
-			return "API-KEY tidak boleh kosong"
+			params = Hash.new
+			params['code'] = 500
+			params['body'] = {"error" => "API-KEY tidak boleh kosong"}
+			data_return = Response.new params
 		else
 			return Unirest.send(
 					http_method.to_sym, 
