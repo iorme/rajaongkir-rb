@@ -15,13 +15,13 @@ rajaongkir = Rajaongkir.new "API-KEY"
 
 # mengambil data city (kota), jika params kosong maka akan menampilkan seluruh kota
 params = {'province' => '6'}
-response = rj.city params
-puts response.raw_body
+response = rajaongkir.city params
+puts response.content
 
 # mengambil data provinsim jika params kosong maka akan menampilkan seluruh provinsi
 params = {'id' => '6'}
-response = rj.province params
-puts response.raw_body
+response = rajaongkir.province params
+puts response.content
 
 # mengambil harga 
 # cost(origin, destination, weight, courier)
@@ -29,13 +29,13 @@ puts response.raw_body
 # destination 	ID kota tujuan
 # weight 		Berat kiriman dalam gram
 # courier 		Kode kurir (jne, pos, tiki)
-puts rj.cost(501, 114, 1000, "jne").raw_body
+puts rajaongkir.cost(501, 114, 1000, "jne").content
 
 # fungsi untuk mendapatkan API-KEY
-puts rj.key
+puts rajaongkir.key
 
 # fungsi untuk mendapatkan base_url
-puts rj.base_url
+puts rajaongkir.base_url
 ```
 
 Response:
@@ -47,10 +47,10 @@ response.code
 response.headers
 
 # object respon
-response.body
+response.content
 
 # respon dalam format json
-response.raw_body
+response.content.to_json
 ```
 
 Untuk keterangan lebih lanjut silahkan kunjungi [Dokumentasi RajaOngkir](http://rajaongkir.com/dokumentasi)
