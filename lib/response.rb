@@ -1,9 +1,9 @@
 class Response
-	attr_accessor :code, :body, :headers
+	attr_accessor :code, :content, :headers
 
 	def initialize data
 		@code = data['code']
-		@body = data['body']
+		@content = data['body']
 		@headers = data['headers']
 	end
 end
