@@ -1,9 +1,9 @@
 class Response
-	attr_accessor :code, :body, :raw_body
+	attr_accessor :code, :body, :headers
 
 	def initialize data
 		@code = data['code']
 		@body = data['body']
-		@raw_body = data['body'].to_json
+		@headers = data['headers']
 	end
 end

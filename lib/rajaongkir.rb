@@ -27,14 +27,14 @@ class Rajaongkir
 	# fungsi untuk mendapatkan data kota
 	#
 	# params = {'province' => '6', 'id' => '161'}
-	def city(params = nil)
+	def city(params = {})
 		request "city",params
 	end
 
 	# fungsi untuk mendapatkan data provinsi
 	#
 	# params = {'id' => '6'}
-	def province(params = nil)
+	def province(params = {})
 		request "province", params
 	end
 
@@ -61,9 +61,7 @@ class Rajaongkir
 		end
 		
 		if error == 1
-			params = Hash.new
-			params['code'] = 500
-			params['body'] = error_message
+			params = set_params 500, error_message
 			data_return = Response.new params
 
 			return data_return
@@ -74,21 +72,34 @@ class Rajaongkir
 		end
 	end
 
+	def set_params code, message
+		params = Hash.new
+		params['code'] = 500
+		params['body'] = message
+		params['headers'] = nil
+
+		return params
+	end
+
 	# fungsi untuk mengirimkan request ke rajaongkir
 	private
-	def request(function, params = nil, http_method = 'get')
+	def request(function, params = {}, http_method = 'get')
 		if @key.nil? || @key == ''
-			params = Hash.new
-			params['code'] = 500
-			params['body'] = {"error" => "API-KEY tidak boleh kosong"}
-			data_return = Response.new params
+			body = {"error" => "API-KEY tidak boleh kosong"}
+			params = set_params 500, body 
 		else
-			return Unirest.send(
+			data = Unirest.send(
 					http_method.to_sym, 
 					@base_url + function, 
 					headers:{"key" => @key},	
 					parameters: params
 				)
+
+			params['code'] = data.code
+			params['body'] = data.body
+			params['headers'] = data.headers
 		end
+
+		Response.new params
 	end
 end
