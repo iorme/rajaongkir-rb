@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'rajaongkir'
-  s.version     = '0.1.3.1'
+  s.version     = '0.2-dev'
   s.summary     = "Simple class untuk API rajaongkir.com"
   s.description = "Simple class ruby untuk API rajaongkir.com"
   s.authors     = ["Harry Yunanto"]
