@@ -6,9 +6,12 @@ Gem::Specification.new do |s|
   s.description = "Simple class ruby untuk API rajaongkir.com"
   s.authors     = ["Harry Yunanto"]
   s.email       = 'yunanto2209@gmail.com'
-  s.files       = ["lib/rajaongkir.rb"]
   s.homepage    = 'https://github.com/iorme/rajaongkir-rb'
   s.license     = 'MIT'
   s.add_development_dependency "unirest", '~> 0'
   s.required_ruby_version = '~> 2.0'
+
+  s.files       = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- test/*`.split("\n")
+  s.require_paths = ['lib']
 end
