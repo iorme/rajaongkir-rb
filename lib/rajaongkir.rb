@@ -72,6 +72,7 @@ class Rajaongkir
 		end
 	end
 
+	# fungsi untuk set params yang digunakan pada response
 	def set_params code, message
 		params = Hash.new
 		params['code'] = 500
