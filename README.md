@@ -18,7 +18,7 @@ params = {'province' => '6'}
 response = rajaongkir.city params
 puts response.content
 
-# mengambil data provinsim jika params kosong maka akan menampilkan seluruh provinsi
+# mengambil data provinsi jika params kosong maka akan menampilkan seluruh provinsi
 params = {'id' => '6'}
 response = rajaongkir.province params
 puts response.content
