@@ -54,3 +54,6 @@ response.content.to_json
 ```
 
 Untuk keterangan lebih lanjut silahkan kunjungi [Dokumentasi RajaOngkir](http://rajaongkir.com/dokumentasi)
+
+## Catatan
+Response pada versi 0.2 berbeda dengan versi sebelumnya, untuk versi 0.1 menghilangkan body dan raw_body dan diganti dengan content
