@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'unirest'
 require File.join(File.dirname(__FILE__), "response.rb")
+require File.join(File.dirname(__FILE__), "validator.rb")
 
 # simple class ruby untuk API Rajaongkir
 # http://rajaongkir.com/dokumentasi
@@ -45,27 +46,28 @@ class Rajaongkir
     # weight Berat kiriman dalam gram
     # courier Kode kurir (jne, pos, tiki)
 	def cost(origin = '', destination = '', weight = 0, courier = 'pos')
-		error_message = Hash.new
+		error_message ||= {}
 
-		if origin == ''
-			error = 1
-			error_message['origin'] = 'origin tidak boleh kosong'
-		end
-		if destination == ''
-			error = 1
-			error_message['destination'] = 'destination tidak boleh kosong'
-		end
-		if weight == 0
-			error = 1
-			error_message['weight'] = 'weight harus lebih besar dari 0'
-		end
-		
-		if error == 1
+		obj = OpenStruct.new(
+			:origin => origin,
+			:destination => destination,
+			:weight => weight
+			);
+		validator = Validator.new(obj)
+		validator.rule(:origin, :not_empty)
+		validator.rule(:destination, :not_empty)
+		validator.rule(:weight, :not_empty)
+
+		if ! validator.valid?
+			validator.errors.each_pair do |key, value|
+				error_message[key.to_s] = value
+			end
+			
 			params = set_params 500, error_message
 			data_return = Response.new params
 
 			return data_return
-		else		
+		else
 			params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
 
 			request "cost", params, 'post'
