@@ -53,13 +53,17 @@ class Rajaongkir
 			:destination => destination,
 			:weight => weight
 			);
-		validator = Validator.new(obj)
-		validator.rule(:origin, :not_empty)
-		validator.rule(:destination, :not_empty)
-		validator.rule(:weight, :not_empty)
+		validation = Validator.new(obj)
+		validation.rule(:origin, :not_empty)
+		validation.rule(:destination, :not_empty)
+		validation.rule(:weight, :not_null)
 
-		if ! validator.valid?
-			validator.errors.each_pair do |key, value|
+		if validation.valid?
+			params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
+
+			request "cost", params, 'post'
+		else
+			validation.errors.each_pair do |key, value|
 				error_message[key.to_s] = value
 			end
 			
@@ -67,10 +71,6 @@ class Rajaongkir
 			data_return = Response.new params
 
 			return data_return
-		else
-			params = {:origin => origin, :destination => destination, :weight => weight, :courier => courier}
-
-			request "cost", params, 'post'
 		end
 	end
 
