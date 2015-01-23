@@ -22,7 +22,7 @@ class Rajaongkir
 
 	# fungsi untuk mendapatkan base_url
 	def get_base_url
-		$base_url
+		@base_url
 	end
 
 	# fungsi untuk mendapatkan data kota
